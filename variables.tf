@@ -1,22 +1,22 @@
 variable "aws_region" {
   type    = string
-  default = "us-east-1"
+  default = "us-east-2"
 }
 
 variable "club_name" {
   type    = string
-  default = "myclub" # <-- change this
+  default = "nvc-ai-cloud-club" 
 }
 
 # Add/remove officer names here as your roster changes
 variable "officers" {
   type = list(string)
   default = [
-    "officer-president",
-    "officer-vp",
-    "officer-secretary",
-    "officer-treasurer",
-    "officer-tech-lead",
-    "officer-dev-1",
+    "president",
+    "vice-president",
+    "secretary",
+    "treasurer",
+    "marketing",
+    "tech-lead",
   ]
 }
