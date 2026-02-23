@@ -1,7 +1,6 @@
 # ============================================================
 # Club Officers IAM Setup
 # ============================================================
-# HOW TO USE:
 #   1. Fill in officer usernames in variables.tf
 #   2. Run: terraform init
 #   3. Run: terraform plan   (preview changes)
@@ -12,7 +11,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 6.33.0"
     }
   }
 
