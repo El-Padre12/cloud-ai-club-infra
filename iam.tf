@@ -196,6 +196,25 @@ resource "aws_iam_policy" "officers_policy" {
         ]
         Resource = ["*"]
       },
+
+      # Allow officers to manage their own credentials
+      {
+        Sid    = "SelfServiceCredentials"
+        Effect = "Allow"
+        Action = [
+          "iam:ChangePassword",
+          "iam:GetUser",
+       ]
+       Resource = [
+          "*"             # "arn:aws:iam::*:user/$${aws:username}" for when users are already logged in
+       ]
+      },
+      {
+      Sid      = "GetPasswordPolicy"
+      Effect   = "Allow"
+      Action   = ["iam:GetAccountPasswordPolicy"]
+      Resource = ["*"]
+      },
     ]
   })
 }

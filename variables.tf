@@ -12,11 +12,12 @@ variable "club_name" {
 variable "officers" {
   type = list(string)
   default = [
-    "president",
-    "vice-president",
-    "secretary",
-    "treasurer",
-    "marketing",
-    "tech-lead",
+    "Herlinda",
+    "Jennifer",
+    "Jalen",
+    "Zachory",
+    "Joseph",
+    "Orlando",
+    "Robert",
   ]
 }
