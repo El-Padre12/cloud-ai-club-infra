@@ -62,6 +62,7 @@ resource "aws_iam_policy" "officers_policy" {
           "s3:GetBucketWebsite",
           "s3:PutPublicAccessBlock",
           "s3:GetPublicAccessBlock",
+          "s3:ListAllMyBuckets",
         ]
         Resource = ["arn:aws:s3:::*"]
       },
