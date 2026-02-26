@@ -191,18 +191,39 @@ resource "aws_iam_policy" "officers_policy" {
         Resource = ["*"]
       },
 
-      # CloudWatch Logs (essential for Lambda debugging)
+      # CloudWatch — app and system metrics/alarms
       {
-        Sid    = "CloudWatchLogsReadOnly"
+        Sid    = "CloudWatchAccess"
         Effect = "Allow"
         Action = [
+          "cloudwatch:DescribeAlarms",
+          "cloudwatch:GetMetricData",
+          "cloudwatch:GetMetricStatistics",
+          "cloudwatch:ListMetrics",
+          "cloudwatch:PutMetricAlarm",
+          "cloudwatch:DeleteAlarms",
           "logs:DescribeLogGroups",
           "logs:DescribeLogStreams",
           "logs:GetLogEvents",
           "logs:FilterLogEvents",
-          "cloudwatch:DescribeAlarms",
-          "cloudwatch:GetMetricData",
-          "cloudwatch:ListMetrics",
+          "logs:StartQuery",
+          "logs:StopQuery",
+          "logs:GetQueryResults",
+        ]
+        Resource = ["*"]
+      },
+
+      # CloudTrail — API and account activity logs
+      {
+        Sid    = "CloudTrailReadOnly"
+        Effect = "Allow"
+        Action = [
+          "cloudtrail:LookupEvents",
+          "cloudtrail:GetTrail",
+          "cloudtrail:GetTrailStatus",
+          "cloudtrail:ListTrails",
+          "cloudtrail:DescribeTrails",
+           "cloudtrail:GetEventSelectors",
         ]
         Resource = ["*"]
       },
