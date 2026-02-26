@@ -128,12 +128,17 @@ resource "aws_iam_policy" "officers_policy" {
         Action = [
           "route53:CreateHostedZone",
           "route53:GetHostedZone",
+          "route53:GetHostedZoneCount",
           "route53:ListHostedZones",
+          "route53:ListHostedZonesByName",
           "route53:ChangeResourceRecordSets",
           "route53:ListResourceRecordSets",
           "route53:GetChange",
           "route53:ListTagsForResource",
           "route53:ChangeTagsForResource",
+          "route53domains:ListDomains",
+          "route53domains:ListOperations",
+          "route53domains:GetDomainDetail",
         ]
         Resource = ["*"]
       },
@@ -155,7 +160,7 @@ resource "aws_iam_policy" "officers_policy" {
           "lambda:TagResource",
           "lambda:ListTags",
         ]
-        Resource = ["arn:aws:lambda:*:*:function:*"]
+        Resource = ["*"]      # "arn:aws:lambda:*:*:function:*"
       },
 
       # PassRole scoped to Lambda only (prevents privilege escalation)
@@ -180,6 +185,7 @@ resource "aws_iam_policy" "officers_policy" {
           "iam:ListRoles",
           "iam:GetPolicy",
           "iam:ListPolicies",
+          "iam:ListUsers",
           "iam:ListAttachedRolePolicies",
         ]
         Resource = ["*"]
@@ -194,6 +200,9 @@ resource "aws_iam_policy" "officers_policy" {
           "logs:DescribeLogStreams",
           "logs:GetLogEvents",
           "logs:FilterLogEvents",
+          "cloudwatch:DescribeAlarms",
+          "cloudwatch:GetMetricData",
+          "cloudwatch:ListMetrics",
         ]
         Resource = ["*"]
       },
