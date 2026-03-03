@@ -1,4 +1,4 @@
-# IAM Group — attach policies to the group, not individuals
+# IAM Group - attach policies to the group, not individuals
 resource "aws_iam_group" "officers" {
   name = "${var.club_name}-officers"
 }
@@ -24,7 +24,7 @@ resource "aws_iam_user_group_membership" "officers" {
   groups = [aws_iam_group.officers.name]
 }
 
-# Console login profiles — officers must reset password on first login
+# Console login profiles - officers must reset password on first login
 resource "aws_iam_user_login_profile" "officers" {
   for_each = toset(var.officers)
 
@@ -206,7 +206,7 @@ resource "aws_iam_policy" "officers_policy" {
         Resource = ["*"]
       },
 
-      # CloudWatch — app and system metrics/alarms
+      # CloudWatch - app and system metrics/alarms
       {
         Sid    = "CloudWatchAccess"
         Effect = "Allow"
@@ -228,7 +228,7 @@ resource "aws_iam_policy" "officers_policy" {
         Resource = ["*"]
       },
 
-      # CloudTrail — API and account activity logs
+      # CloudTrail - API and account activity logs
       {
         Sid    = "CloudTrailReadOnly"
         Effect = "Allow"
@@ -238,7 +238,7 @@ resource "aws_iam_policy" "officers_policy" {
           "cloudtrail:GetTrailStatus",
           "cloudtrail:ListTrails",
           "cloudtrail:DescribeTrails",
-           "cloudtrail:GetEventSelectors",
+          "cloudtrail:GetEventSelectors",
         ]
         Resource = ["*"]
       },
