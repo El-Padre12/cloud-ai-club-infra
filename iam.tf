@@ -199,6 +199,20 @@ resource "aws_iam_policy" "officers_policy" {
         Resource = ["arn:aws:iam::*:role/service-role/*"]
       },
 
+      # Policy management for Lambda execution roles
+      {
+        Sid    = "IAMLambdaPolicyManagement"
+        Effect = "Allow"
+        Action = [
+          "iam:CreatePolicy",
+          "iam:DeletePolicy",
+          "iam:GetPolicy",
+          "iam:GetPolicyVersion",
+          "iam:ListPolicyVersions",
+        ]
+        Resource = ["arn:aws:iam::*:policy/*"]
+      },
+
       # IAM read-only (so officers can see roles/policies)
       {
         Sid    = "IAMReadOnly"
@@ -268,6 +282,22 @@ resource "aws_iam_policy" "officers_policy" {
       Effect   = "Allow"
       Action   = ["iam:GetAccountPasswordPolicy"]
       Resource = ["*"]
+      },
+      # Amazon Q — full access for diagnostics and troubleshooting
+      {
+        Sid    = "AmazonQAccess"
+        Effect = "Allow"
+        Action = [
+          "q:SendMessage",
+          "q:StartConversation",
+          "q:GetConversation",
+          "q:ListConversations",
+          "q:DeleteConversation",
+          "q:StartTroubleshootingAnalysis",
+          "q:GetTroubleshootingResults",
+          "q:StartTroubleshootingResolutionExplanation",
+        ]
+        Resource = ["*"]
       },
     ]
   })
