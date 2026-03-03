@@ -173,9 +173,22 @@ resource "aws_iam_policy" "officers_policy" {
       {
         Sid    = "IAMPassRoleForLambda"
         Effect = "Allow"
+        Action = ["iam:PassRole"]
+        Resource = ["arn:aws:iam::*:role/service-role/*"]
+        Condition = {
+          StringEquals = {
+            "iam:PassedToService" = "lambda.amazonaws.com"
+          }
+        }
+      },
+
+      # Role management — scoped to service roles only, no condition needed
+      {
+        Sid    = "IAMLambdaRoleManagement"
+        Effect = "Allow"
         Action = [
-          "iam:PassRole",
           "iam:CreateRole",
+          "iam:CreatePolicy",
           "iam:AttachRolePolicy",
           "iam:DetachRolePolicy",
           "iam:DeleteRole",
@@ -184,11 +197,6 @@ resource "aws_iam_policy" "officers_policy" {
           "iam:ListAttachedRolePolicies",
         ]
         Resource = ["arn:aws:iam::*:role/service-role/*"]
-        Condition = {
-          StringEquals = {
-            "iam:PassedToService" = "lambda.amazonaws.com"
-          }
-        }
       },
 
       # IAM read-only (so officers can see roles/policies)
