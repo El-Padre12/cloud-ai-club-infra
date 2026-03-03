@@ -1,7 +1,11 @@
 # Install Terraform, then in the folder with these files:
-terraform init
-terraform plan        # shows what it will create — review this!
-terraform apply       # actually creates everything
+```bash 
+ terraform init
+ terraform plan        
+ terraform apply       
+ ```
 
 # After apply, get the temp passwords with:
+```bash
 terraform output -json officer_passwords
+```

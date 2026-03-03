@@ -173,8 +173,17 @@ resource "aws_iam_policy" "officers_policy" {
       {
         Sid    = "IAMPassRoleForLambda"
         Effect = "Allow"
-        Action = ["iam:PassRole"]
-        Resource = ["*"]
+        Action = [
+          "iam:PassRole",
+          "iam:CreateRole",
+          "iam:AttachRolePolicy",
+          "iam:DetachRolePolicy",
+          "iam:DeleteRole",
+          "iam:GetRole",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies",
+        ]
+        Resource = ["arn:aws:iam::*:role/service-role/*"]
         Condition = {
           StringEquals = {
             "iam:PassedToService" = "lambda.amazonaws.com"
